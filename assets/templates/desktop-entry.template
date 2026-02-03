@@ -1,0 +1,138 @@
+# Desktop Entry template for GUI applications
+# Copy this file to your package directory and rename to pkgname.desktop
+# This file is REQUIRED for all GUI applications in Terra
+
+[Desktop Entry]
+Name=Application Name
+Comment=A brief description of the application
+Exec=/usr/bin/binary-name
+Icon=icon-name
+Type=Application
+Categories=Utility;
+
+# ========================================
+# Required Fields
+# ========================================
+# Name (REQUIRED) - Application name shown in menus
+# Comment (REQUIRED) - Short description
+# Exec (REQUIRED) - Command to launch the app
+# Icon (REQUIRED) - Icon name WITHOUT extension
+# Type (REQUIRED) - Must be "Application" for apps
+# Categories (RECOMMENDED) - Menu category (see below)
+
+# ========================================
+# Common Categories
+# ========================================
+# Utility - System utilities and tools
+# Development - Programming and development tools
+# Office - Productivity and office applications
+# AudioVideo - Audio and video applications
+# Graphics - Graphics and imaging applications
+# Network - Network and internet applications
+# Game - Games
+# Education - Educational software
+# System - System administration tools
+# Settings - Settings and configuration tools
+
+# For GUI apps, use multiple categories separated by semicolons:
+# Categories=Development;IDE;
+
+# ========================================
+# Optional Fields
+# ========================================
+# Terminal=false          # Whether app runs in terminal (default: false)
+# StartupNotify=true      # Show startup notification
+# NoDisplay=false         # Hide from menus if true
+# Keywords=ide;code;      # Keywords for search
+
+# For apps that should run in terminal:
+# Terminal=true
+
+# For apps with generic name:
+# GenericName=Text Editor
+
+# For apps that should be hidden:
+# NoDisplay=true
+
+# ========================================
+# Common Exec Patterns
+# ========================================
+# Direct binary:
+# Exec=/usr/bin/appname
+
+# For apps using env var:
+# Exec=env VARIABLE=value /usr/bin/appname
+
+# For electron apps:
+# Exec=/usr/bin/appname %U
+
+# For apps with arguments:
+# Exec=/usr/bin/appname --option
+
+# For apps handling URLs:
+# Exec=/usr/bin/appname %u
+
+# For apps handling files:
+# Exec=/usr/bin/appname %f
+
+# For apps handling multiple files:
+# Exec=/usr/bin/appname %F
+
+# ========================================
+# Icons
+# ========================================
+# The Icon field should be the icon filename WITHOUT extension
+# Terra will look for icons in:
+# 1. /usr/share/icons/hicolor/scalable/apps/icon.svg
+# 2. /usr/share/icons/hicolor/*/apps/icon.png
+# 3. /usr/share/pixmaps/icon.png
+
+# Example: If you have /usr/share/icons/hicolor/scalable/apps/myapp.svg
+# Use: Icon=myapp
+
+# Example: If you have /usr/share/pixmaps/myapp.png
+# Use: Icon=myapp
+
+# ========================================
+# Installing the Desktop File
+# ========================================
+# Add to spec file:
+
+# Source1: pkgname.desktop
+
+# ...
+
+# %install
+# %desktop_file_install %{SOURCE1}
+
+# %check
+# %desktop_file_validate %{buildroot}%{_appsdir}/pkgname.desktop
+
+# %files
+# %{_appsdir}/pkgname.desktop
+
+# ========================================
+# Complete Example
+# ========================================
+# [Desktop Entry]
+# Name=My Awesome App
+# Comment=An awesome application that does cool stuff
+# Exec=/usr/bin/my-awesome-app
+# Icon=my-awesome-app
+# Type=Application
+# Categories=Utility;GTK;
+# Terminal=false
+# StartupNotify=true
+# Keywords=awesome;cool;app;
+
+# ========================================
+# Validation
+# ========================================
+# Always validate your desktop file using:
+# desktop-file-validate path/to/file.desktop
+
+# This checks for:
+# Required fields presence
+# Proper syntax
+# Valid categories
+# Executable path validity

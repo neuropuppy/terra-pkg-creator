@@ -1,0 +1,117 @@
+# AndaX update script template for Terra packages
+# Copy this file to your package directory as update.rhai
+# This script is automatically run by Andaman to update package versions
+
+# IMPORTANT: You MUST use semicolons (;) at the end of each statement!
+
+# ========================================
+# Basic GitHub Version Update
+# ========================================
+# Gets the latest release tag from a GitHub repository
+# let ver = gh("owner/repo");
+// rpm.version(ver);
+
+# ========================================
+# GitHub with Custom Format
+# ========================================
+// Get version from GitHub and format it (e.g., prepend 'v')
+// let ver = gh("owner/repo");
+// rpm.version("v" + ver);
+
+# ========================================
+# GitLab Version Update
+# ========================================
+// Get version from GitLab
+// let ver = gl("owner/project");
+// rpm.version(ver);
+
+# ========================================
+# PyPI Version Update
+# ========================================
+// Get version from Python Package Index
+// let ver = pypi("package-name");
+// rpm.version(ver);
+
+# ========================================
+# Crates.io Version Update
+# ========================================
+// Get version from Rust crates registry
+// let ver = crate("crate-name");
+// rpm.version(ver);
+
+# ========================================
+# GitHub with Latest Commit
+# ========================================
+// For nightly packages tracking latest commit
+// let commit = gh_commit("owner/repo", "main");
+// let date = gh_commit_date("owner/repo", commit);
+// rpm.version("0~" + date + "git." + commit);
+
+# ========================================
+# Multiple Sources (Conditional)
+# ========================================
+// Update from different sources based on conditions
+// if filters.contains("nightly") {
+//   // Nightly version from git commits
+//   let commit = gh_commit("owner/repo", "main");
+//   let date = gh_commit_date("owner/repo", commit);
+//   rpm.version("2.0.0~" + date + "git." + commit);
+// } else {
+//   // Stable version from releases
+//   let ver = gh("owner/repo");
+//   rpm.version(ver);
+// }
+
+# ========================================
+# Per-Branch Updates
+# ========================================
+// For packages that update differently per branch
+// Use labels.branch to get the current branch name
+// if labels.branch == "f41" {
+//   let ver = gh("owner/repo", "v1");
+//   rpm.version(ver);
+// } else if labels.branch == "f42" {
+//   let ver = gh("owner/repo", "v2");
+//   rpm.version(ver);
+// }
+
+# ========================================
+# Advanced: Custom Version Format
+# ========================================
+// You can transform versions as needed
+// let ver = gh("owner/repo");
+// let major = ver.split(".")[0];
+// let minor = ver.split(".")[1];
+// rpm.version(major + "." + minor + ".0");
+
+# ========================================
+# Error Handling
+# ========================================
+// Most AndaX functions will fail gracefully and skip the update
+// if the API rate limit is reached or the repository is not found
+// You don't need explicit error handling in most cases
+
+# ========================================
+# Available Functions
+# ========================================
+// See references/auto-update.md for complete documentation
+//
+// gh(owner/repo)           - Get latest release from GitHub
+// gh_commit(owner/repo, branch) - Get latest commit hash
+// gh_commit_date(owner/repo, commit) - Get commit date
+// gl(owner/project)        - Get latest release from GitLab
+// pypi(package)            - Get latest version from PyPI
+// crate(name)              - Get latest version from crates.io
+// rpm.version(ver)         - Update Version: field in spec
+// filters.contains(label)  - Check if label is present
+// labels.branch            - Get current branch name (for per-branch updates)
+
+# ========================================
+# Tips
+# ========================================
+// - Avoid using GitHub API if possible (rate limits)
+// - Prefer GitLab, crates.io, PyPI when available
+// - Keep scripts simple - one line is usually enough
+// - Always use semicolons (;)
+// - Don't run code unrelated to updating versions
+// - Test your script by running: anda update -vv --path anda/path/to/pkg

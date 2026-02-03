@@ -1,0 +1,57 @@
+# Anda manifest for Terra package
+# Copy this file to your package directory and rename to anda.hcl
+
+# Basic configuration (standard package)
+project pkg {
+  rpm {
+    spec = "pkgname.spec"
+  }
+}
+
+# For nightly packages
+# project pkg {
+#   rpm {
+#     spec = "pkgname.spec"
+#   }
+#   labels {
+#     nightly = 1
+#   }
+# }
+
+# For packages with custom update script
+# project pkg {
+#   rpm {
+#     spec = "pkgname.spec"
+#     update = "custom-update.rhai"
+#   }
+# }
+
+# For packages in subrepos (extras, nvidia, mesa, multimedia)
+# project pkg {
+#   rpm {
+#     spec = "pkgname.spec"
+#   }
+#   labels {
+#     subrepo = "extras"
+#   }
+# }
+
+# For weekly packages (0-6 = day of week)
+# project pkg {
+#   rpm {
+#     spec = "pkgname.spec"
+#   }
+#   labels {
+#     weekly = 0  # Change to random 0-6
+#   }
+# }
+
+# For per-branch packages
+# project pkg {
+#   rpm {
+#     spec = "pkgname.spec"
+#   }
+#   labels {
+#     updbranch = 1
+#   }
+# }

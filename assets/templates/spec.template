@@ -1,0 +1,121 @@
+# RPM spec file template for Terra packages
+# Copy this file to your package directory and rename to pkgname.spec
+
+Name:           pkgname
+Version:        1.2.3
+Release:        1%?dist
+Summary:        A brief description of the package
+
+URL:            https://example.com
+Source0:        %{url}/releases/download/%{version}/%{name}-%{version}.tar.gz
+
+License:        MIT OR Apache-2.0
+# Add build dependencies here
+# BuildRequires:  gcc
+# BuildRequires:  make
+# Add runtime dependencies here
+# Requires:       some-library >= 1.0
+
+# REQUIRED: Add yourself as the packager
+Packager:       Your Name <your.email@example.com>
+
+%description
+A longer description of the package. This should explain what the software does
+and any important information users should know. This description should end with a period.
+
+# ========================================
+# Prep Section
+# ========================================
+%prep
+# Automatically extract and patch sources
+%autosetup
+
+# For git repos without release tags, use:
+# %autosetup -Sgit
+
+# For specific extraction, use shell commands:
+# tar -xf %{SOURCE0}
+# cd pkgname-%{version}
+
+# ========================================
+# Build Section
+# ========================================
+%build
+# Build commands here
+# For C/C++ with configure:
+# %configure
+# %make_build
+
+# For CMake:
+# %cmake
+# %cmake_build
+
+# For Meson:
+# %meson
+# %meson_compile
+
+# For Rust (after %cargo_prep_online):
+# %cargo_build --locked
+
+# For Go (after %goprep_online):
+# %gobuild -o %{buildroot}%{_bindir}/binary-name ./cmd/app
+
+# ========================================
+# Install Section
+# ========================================
+%install
+# Install commands here
+
+# Example for standard installation:
+# %make_install
+
+# Example for installing a single binary:
+# install -Dm755 binary -t %{buildroot}%{_bindir}
+
+# Example for installing a Go binary:
+# %goinstall
+
+# Example for Rust:
+# %cargo_install
+
+# Example for installing man pages:
+# install -Dm644 man/%{name}.1 -t %{buildroot}%{_mandir}/man1
+
+# Example for installing documentation:
+# install -Dm644 README.md -t %{buildroot}%{_docdir}/%{name}
+# install -Dm644 LICENSE -t %{buildroot}%{_licensedir}/%{name}
+
+# ========================================
+# Files Section
+# ========================================
+%files
+# List all files to be included in the package
+# Use macros for standard paths:
+# %{_bindir}/binary-name
+# %{_mandir}/man1/*
+# %{_docdir}/%{name}/*
+# %{_licensedir}/%{name}/*
+
+# For documentation files:
+# %doc README.md
+# %doc AUTHORS
+
+# For license files:
+# %license LICENSE
+# %license COPYING
+
+# For libraries (in -libs subpackage):
+# %{_libdir}/*.so.*
+
+# For development files (in -devel subpackage):
+# %{_includedir}/*
+# %{_libdir}/*.so
+# %{_libdir}/*.a
+# %{_libdir}/pkgconfig/*.pc
+
+# ========================================
+# Changelog Section
+# ========================================
+%changelog
+* Day Mon Date Year Your Name <your.email@example.com> - Version-Release
+- Initial package
